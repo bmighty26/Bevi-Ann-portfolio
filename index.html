@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Bevi Ann Mighty | Portfolio</title>
+
+  <style>
+    /* =========================
+       GENERAL STYLES
+       ========================= */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f6f8fb;
+      color: #243044;
+      line-height: 1.6;
+    }
+
+    /* Element selector */
+    h1, h2, h3 {
+      margin-top: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================
+       NAVIGATION
+       ========================= */
+
+    header {
+      background-color: #102a43;
+      color: white;
+      padding: 18px 8%;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      color: white;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+    }
+
+    /* Pseudo-class selector */
+    nav a:hover {
+      color: #65d6c6;
+    }
+
+    /* =========================
+       HERO SECTION
+       ========================= */
+
+    #home {
+      background: linear-gradient(135deg, #102a43, #1d4e6f);
+      color: white;
+      padding: 110px 8%;
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      margin-bottom: 15px;
+      line-height: 1.1;
+    }
+
+    .hero h1 span {
+      color: #65d6c6;
+    }
+
+    .hero p {
+      max-width: 650px;
+      font-size: 1.15rem;
+      color: #e6f0f5;
+    }
+
+    .tagline {
+      display: inline-block;
+      padding: 8px 16px;
+      margin-bottom: 18px;
+      border: 1px solid #65d6c6;
+      border-radius: 20px;
+      color: #65d6c6;
+      font-size: 0.9rem;
+    }
+
+    .hero-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 35px;
+      text-align: center;
+    }
+
+    .initials {
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background-color: #65d6c6;
+      color: #102a43;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    /* =========================
+       BUTTON
+       ========================= */
+
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      background-color: #65d6c6;
+      color: #102a43;
+      font-weight: bold;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: white;
+      transform: translateY(-3px);
+    }
+
+    /* =========================
+       GENERAL SECTIONS
+       ========================= */
+
+    section {
+      padding: 80px 8%;
+    }
+
+    .section-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+      color: #102a43;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #627d98;
+    }
+
+    /* =========================
+       ABOUT
+       ========================= */
+
+    #about {
+      background-color: white;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: #486581;
+    }
+
+    .career-box {
+      padding: 30px;
+      border: 2px solid #d9e2ec;
+      border-radius: 15px;
+      background-color: #f6f8fb;
+    }
+
+    .career-box h3 {
+      color: #102a43;
+    }
+
+    .career-box ul {
+      padding-left: 20px;
+      color: #486581;
+    }
+
+    .career-box li {
+      margin-bottom: 10px;
+    }
+
+    /* =========================
+       SKILLS
+       ========================= */
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .skill {
+      padding: 8px 15px;
+      border: 1px solid #65d6c6;
+      border-radius: 20px;
+      color: #155e63;
+      background-color: #e6fffb;
+      font-size: 0.9rem;
+    }
+
+    /* =========================
+       PROJECTS
+       ========================= */
+
+    #projects {
+      background-color: #f6f8fb;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .project-card {
+      background-color: white;
+      padding: 28px;
+      border: 1px solid #d9e2ec;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(16, 42, 67, 0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(16, 42, 67, 0.12);
+    }
+
+    .project-number {
+      color: #159a9c;
+      font-size: 0.85rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .project-card h3 {
+      color: #102a43;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      color: #627d98;
+      font-size: 0.95rem;
+    }
+
+    .project-link {
+      color: #159a9c;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    /* =========================
+       LEARNING SECTION
+       ========================= */
+
+    #learning {
+      background-color: #102a43;
+      color: white;
+    }
+
+    #learning .section-title h2 {
+      color: white;
+    }
+
+    #learning .section-title p {
+      color: #bcccdc;
+    }
+
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .learning-card {
+      padding: 30px;
+      border-left: 4px solid #65d6c6;
+      background-color: rgba(255, 255, 255, 0.07);
+    }
+
+    .learning-card h3 {
+      color: #65d6c6;
+    }
+
+    .learning-card p {
+      color: #d9e2ec;
+    }
+
+    /* =========================
+       CONTACT
+       ========================= */
+
+    #contact {
+      background-color: white;
+      text-align: center;
+    }
+
+    .contact-box {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 40px;
+      border: 2px solid #d9e2ec;
+      border-radius: 18px;
+    }
+
+    .contact-box p {
+      color: #627d98;
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    footer {
+      padding: 25px;
+      background-color: #0b1f33;
+      color: #9fb3c8;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    /* =========================
+       RESPONSIVE DESIGN
+       ========================= */
+
+    @media (max-width: 800px) {
+      nav {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      nav ul {
+        gap: 15px;
+      }
+
+      .hero,
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+
+      .projects-grid,
+      .learning-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #home {
+        padding: 80px 6%;
+      }
+
+      section {
+        padding: 60px 6%;
+      }
+
+      .hero {
+        text-align: center;
+      }
+
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <div class="logo">BEVI ANN MIGHTY</div>
+
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#learning">Learning</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <!-- Hero -->
+  <section id="home">
+    <div class="hero">
+
+      <div>
+        <span class="tagline">Accounting Student • Future Accountant</span>
+
+        <h1>
+          Hello, I'm <span>Bevi Ann.</span>
+        </h1>
+
+        <p>
+          I'm studying accounting with the goal of becoming an accountant
+          for a large firm. I'm also building my technical and problem-solving
+          skills one project at a time.
+        </p>
+
+        <a href="#projects" class="button">View My Projects</a>
+      </div>
+
+      <div class="hero-card">
+        <div class="initials">BM</div>
+        <h2>Building My Future</h2>
+        <p>
+          Learning. Creating. Growing.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- About -->
+  <section id="about">
+    <div class="section-container">
+
+      <div class="section-title">
+        <h2>About Me</h2>
+        <p>A little bit about where I'm headed.</p>
+      </div>
+
+      <div class="about-content">
+
+        <div class="about-text">
+          <h3>My Journey</h3>
+
+          <p>
+            I'm currently studying accounting and working toward a career
+            in the accounting field. My goal is to eventually work for
+            a large firm where I can continue developing my professional
+            skills and contribute to meaningful work.
+          </p>
+
+          <p>
+            Along the way, I'm exploring technology and learning how to
+            create projects that demonstrate my creativity, attention
+            to detail, and ability to learn new skills.
+          </p>
+
+          <div class="skills">
+            <span class="skill">Accounting</span>
+            <span class="skill">Problem Solving</span>
+            <span class="skill">Attention to Detail</span>
+            <span class="skill">HTML</span>
+            <span class="skill">CSS</span>
+            <span class="skill">Continuous Learning</span>
+          </div>
+        </div>
+
+        <div class="career-box">
+          <h3>My Career Goal</h3>
+
+          <p>
+            I want to build a successful career in accounting and
+            eventually become an accountant at a respected large firm.
+          </p>
+
+          <ul>
+            <li>Complete my accounting studies</li>
+            <li>Continue developing professional skills</li>
+            <li>Build a strong portfolio of projects</li>
+            <li>Gain real-world experience</li>
+            <li>Grow into my future accounting career</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="section-container">
+
+      <div class="section-title">
+        <h2>My Projects</h2>
+        <p>
+          A growing collection of things I've created and learned.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+
+        <article class="project-card">
+          <span class="project-number">PROJECT 01</span>
+          <h3>Personal Portfolio</h3>
+          <p>
+            A single-page website created to showcase my projects,
+            skills, and progress as I continue learning.
+          </p>
+          <a href="#home" class="project-link">View Project →</a>
+        </article>
+
+        <article class="project-card">
+          <span class="project-number">PROJECT 02</span>
+          <h3>Coming Soon</h3>
+          <p>
+            This space is ready for my next project. I'll add new
+            projects here as I continue developing my skills.
+          </p>
+          <span class="project-link">Coming Soon</span>
+        </article>
+
+        <article class="project-card">
+          <span class="project-number">PROJECT 03</span>
+          <h3>Coming Soon</h3>
+          <p>
+            Another future project will go here. This portfolio will
+            continue to grow throughout my course and beyond.
+          </p>
+          <span class="project-link">Coming Soon</span>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Learning -->
+  <section id="learning">
+    <div class="section-container">
+
+      <div class="section-title">
+        <h2>What I'm Learning</h2>
+        <p>
+          Skills I'm developing as I work toward my goals.
+        </p>
+      </div>
+
+      <div class="learning-grid">
+
+        <div class="learning-card">
+          <h3>Accounting</h3>
+          <p>
+            Developing the knowledge and skills needed for a future
+            career in professional accounting.
+          </p>
+        </div>
+
+        <div class="learning-card">
+          <h3>Technology</h3>
+          <p>
+            Learning how technology and digital tools can help me
+            communicate ideas and solve problems.
+          </p>
+        </div>
+
+        <div class="learning-card">
+          <h3>Web Development</h3>
+          <p>
+            Practicing HTML, CSS, selectors, layouts, and the CSS
+            Box Model through hands-on projects.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="section-container">
+
+      <div class="section-title">
+        <h2>Let's Connect</h2>
+        <p>Thanks for taking a look at my portfolio.</p>
+      </div>
+
+      <div class="contact-box">
+        <h3>Bevi Ann Mighty</h3>
+        <p>
+          Accounting Student • Future Accountant • Lifelong Learner
+        </p>
+
+        <!-- Replace the email below with your real email -->
+        <a href="mailto:your-email@example.com" class="button">
+          Contact Me
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Bevi Ann Mighty • Personal Portfolio</p>
+  </footer>
+
+</body>
+</html>
