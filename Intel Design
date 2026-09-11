@@ -1,0 +1,2632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Interactive Intel sustainability goals timeline."
+    >
+
+    <title>Intel Sustainability Timeline</title>
+
+
+    <style>
+
+        /* =====================================================
+           ROOT VARIABLES
+        ===================================================== */
+
+        :root {
+
+            --intel-blue: #0068b5;
+            --intel-blue-light: #1595dc;
+
+            --navy: #061522;
+            --navy-light: #0d2639;
+
+            --pink: #f8dce5;
+            --pink-dark: #e9b7ca;
+
+            --gold: #ead9a5;
+            --gold-dark: #cbb56c;
+
+            --white: #ffffff;
+            --gray: #c8d2d9;
+
+            --glass: rgba(255,255,255,0.08);
+
+            --border:
+                rgba(234,217,165,0.45);
+
+            --shadow:
+                0 25px 70px rgba(0,0,0,0.4);
+        }
+
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: var(--white);
+
+            background:
+
+                radial-gradient(
+                    circle at 15% 15%,
+                    rgba(248,220,229,0.12),
+                    transparent 28%
+                ),
+
+                radial-gradient(
+                    circle at 85% 65%,
+                    rgba(234,217,165,0.12),
+                    transparent 30%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    var(--navy),
+                    var(--navy-light)
+                );
+
+            min-height: 100vh;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           TECH GRID BACKGROUND
+        ===================================================== */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 45px 45px;
+
+            pointer-events: none;
+
+            z-index: -2;
+        }
+
+
+        /* =====================================================
+           DECORATIVE LIGHT
+        ===================================================== */
+
+        body::after {
+
+            content: "";
+
+            position: fixed;
+
+            width: 500px;
+            height: 500px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(0,104,181,0.18),
+                    transparent 70%
+                );
+
+            top: 20%;
+            right: -250px;
+
+            pointer-events: none;
+
+            z-index: -1;
+        }
+
+
+        /* =====================================================
+           HEADER / HERO
+        ===================================================== */
+
+        header {
+
+            min-height: 88vh;
+
+            padding:
+                50px
+                7vw
+                70px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        /* Hero glow */
+
+        header::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 650px;
+            height: 650px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(0,104,181,0.24),
+                    transparent 68%
+                );
+
+            right: -180px;
+            top: -180px;
+
+            pointer-events: none;
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .top-nav {
+
+            position: absolute;
+
+            top: 30px;
+            left: 7vw;
+            right: 7vw;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        .brand {
+
+            font-size: 2.4rem;
+
+            font-weight: 800;
+
+            letter-spacing: -3px;
+
+            color: white;
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            gap: 35px;
+
+            list-style: none;
+        }
+
+
+        .nav-links a {
+
+            color: var(--gray);
+
+            text-decoration: none;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            font-size: 0.7rem;
+
+            transition:
+                color .3s ease;
+        }
+
+
+        .nav-links a:hover {
+
+            color: var(--pink);
+        }
+
+
+        /* =====================================================
+           HERO CONTENT
+        ===================================================== */
+
+        .hero-content {
+
+            max-width: 900px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .eyebrow {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            color: var(--gold);
+
+            text-transform: uppercase;
+
+            letter-spacing: 4px;
+
+            font-size: .75rem;
+
+            font-weight: 700;
+
+            margin-bottom: 22px;
+        }
+
+
+        .eyebrow::after {
+
+            content: "";
+
+            width: 120px;
+
+            height: 1px;
+
+            background: var(--gold);
+        }
+
+
+        h1 {
+
+            font-size:
+                clamp(
+                    3rem,
+                    7vw,
+                    6.5rem
+                );
+
+            line-height: .95;
+
+            letter-spacing: -4px;
+
+            margin-bottom: 30px;
+
+            max-width: 950px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    white,
+                    var(--pink),
+                    var(--gold)
+                );
+
+            -webkit-background-clip: text;
+
+            background-clip: text;
+
+            color: transparent;
+        }
+
+
+        .hero-subheading {
+
+            max-width: 650px;
+
+            font-size:
+                clamp(
+                    1rem,
+                    2vw,
+                    1.25rem
+                );
+
+            line-height: 1.8;
+
+            color: var(--gray);
+        }
+
+
+        .scroll-prompt {
+
+            margin-top: 50px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            color: var(--pink);
+
+            font-size: .85rem;
+
+            letter-spacing: 1px;
+
+            animation:
+                bounce 2s infinite;
+        }
+
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(8px);
+            }
+        }
+
+
+        /* =====================================================
+           SECTION INTRO
+        ===================================================== */
+
+        .intro {
+
+            max-width: 900px;
+
+            margin: auto;
+
+            padding:
+                50px 25px;
+
+            text-align: center;
+        }
+
+
+        .intro h2 {
+
+            font-size:
+                clamp(
+                    2rem,
+                    5vw,
+                    3.5rem
+                );
+
+            margin-bottom: 20px;
+
+            color: var(--pink);
+        }
+
+
+        .intro p {
+
+            color: var(--gray);
+
+            line-height: 1.8;
+
+            max-width: 750px;
+
+            margin: auto;
+        }
+
+
+        /* =====================================================
+           TIMELINE SECTION
+        ===================================================== */
+
+        .timeline-section {
+
+            position: relative;
+
+            padding:
+                50px 0
+                100px;
+        }
+
+
+        /* =====================================================
+           TIMELINE CONTROLS
+        ===================================================== */
+
+        .timeline-controls {
+
+            position: absolute;
+
+            top: 50%;
+
+            left: 25px;
+            right: 25px;
+
+            transform:
+                translateY(-50%);
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            pointer-events: none;
+
+            z-index: 30;
+        }
+
+
+        .timeline-button {
+
+            width: 55px;
+            height: 55px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid var(--gold);
+
+            background:
+                rgba(6,21,34,.85);
+
+            backdrop-filter:
+                blur(12px);
+
+            color: var(--gold);
+
+            font-size: 1.5rem;
+
+            cursor: pointer;
+
+            pointer-events: auto;
+
+            transition:
+                transform .3s ease,
+                background .3s ease,
+                color .3s ease;
+        }
+
+
+        .timeline-button:hover {
+
+            transform: scale(1.12);
+
+            background:
+                rgba(248,220,229,.15);
+
+            color: var(--pink);
+        }
+
+
+        /* =====================================================
+           TIMELINE LINE
+        ===================================================== */
+
+        .timeline-line {
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+
+            top: 50%;
+
+            height: 2px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    var(--pink),
+                    var(--gold),
+                    var(--intel-blue),
+                    var(--pink)
+                );
+
+            opacity: .55;
+        }
+
+
+        /* =====================================================
+           HORIZONTAL SCROLL CONTAINER
+        ===================================================== */
+
+        .timeline {
+
+            display: flex;
+
+            gap: 35px;
+
+            width: 100%;
+
+            padding:
+                80px
+                max(8vw, 80px)
+                90px;
+
+            overflow-x: auto;
+
+            overflow-y: hidden;
+
+            /*
+                MAIN SCROLL SNAP FEATURE
+            */
+
+            scroll-snap-type:
+                x mandatory;
+
+            scroll-behavior:
+                smooth;
+
+            scroll-padding-inline:
+                max(8vw, 80px);
+
+            overscroll-behavior-x:
+                contain;
+
+            scrollbar-width: thin;
+
+            scrollbar-color:
+                var(--gold)
+                transparent;
+        }
+
+
+        /* Chrome / Safari scrollbar */
+
+        .timeline::-webkit-scrollbar {
+
+            height: 8px;
+        }
+
+
+        .timeline::-webkit-scrollbar-track {
+
+            background:
+                transparent;
+        }
+
+
+        .timeline::-webkit-scrollbar-thumb {
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    var(--pink),
+                    var(--gold)
+                );
+
+            border-radius: 50px;
+        }
+
+
+        /* =====================================================
+           MILESTONE CARD
+        ===================================================== */
+
+        .milestone {
+
+            flex:
+                0 0
+                clamp(
+                    310px,
+                    29vw,
+                    390px
+                );
+
+            min-height: 520px;
+
+            scroll-snap-align:
+                center;
+
+            scroll-snap-stop:
+                always;
+
+            position: relative;
+
+            overflow: hidden;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius:
+                28px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.12),
+                    rgba(255,255,255,.035)
+                );
+
+            backdrop-filter:
+                blur(18px);
+
+            box-shadow:
+                var(--shadow);
+
+            transition:
+
+                transform
+                .6s
+                cubic-bezier(.2,.8,.2,1),
+
+                box-shadow
+                .5s ease,
+
+                border-color
+                .5s ease;
+        }
+
+
+        /* Randomized card layout */
+
+        .milestone:nth-child(1) {
+
+            transform:
+                translateY(10px)
+                rotate(-.5deg);
+        }
+
+
+        .milestone:nth-child(2) {
+
+            transform:
+                translateY(-12px)
+                rotate(.7deg);
+        }
+
+
+        .milestone:nth-child(3) {
+
+            transform:
+                translateY(8px)
+                rotate(-.8deg);
+        }
+
+
+        .milestone:nth-child(4) {
+
+            transform:
+                translateY(-15px)
+                rotate(.6deg);
+        }
+
+
+        .milestone:nth-child(5) {
+
+            transform:
+                translateY(5px)
+                rotate(-.5deg);
+        }
+
+
+        .milestone:hover {
+
+            transform:
+                translateY(-18px)
+                rotate(-1deg)
+                scale(1.025);
+
+            border-color:
+                var(--pink);
+
+            box-shadow:
+
+                0 35px 80px
+                rgba(0,0,0,.5),
+
+                0 0 40px
+                rgba(234,217,165,.18);
+        }
+
+
+        /* =====================================================
+           MILESTONE VISUALS
+        ===================================================== */
+
+        .milestone-image {
+
+            height: 215px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 4rem;
+
+            isolation: isolate;
+        }
+
+
+        /* Renewable energy */
+
+        .renewable-image {
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #17344a,
+                    #526f6a,
+                    #dfc88c
+                );
+        }
+
+
+        .renewable-image::before {
+
+            content: "☀️";
+
+            font-size: 5rem;
+
+            filter:
+                drop-shadow(
+                    0 10px 20px
+                    rgba(0,0,0,.35)
+                );
+        }
+
+
+        /* Water */
+
+        .water-image {
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #123c5a,
+                    #477e91,
+                    #ead9a5
+                );
+        }
+
+
+        .water-image::before {
+
+            content: "💧";
+
+            font-size: 6rem;
+        }
+
+
+        /* Zero waste */
+
+        .waste-image {
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #263e35,
+                    #6c8d72,
+                    #f3d4df
+                );
+        }
+
+
+        .waste-image::before {
+
+            content: "♻️";
+
+            font-size: 6rem;
+        }
+
+
+        /* Net zero */
+
+        .netzero-image {
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #172d45,
+                    #416b70,
+                    #e8d49d
+                );
+        }
+
+
+        .netzero-image::before {
+
+            content: "🌎";
+
+            font-size: 6rem;
+        }
+
+
+        /* Supply chain */
+
+        .supply-image {
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #10253c,
+                    #765b72,
+                    #ead9a5
+                );
+        }
+
+
+        .supply-image::before {
+
+            content: "🔗";
+
+            font-size: 6rem;
+        }
+
+
+        .milestone-image::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+
+                linear-gradient(
+                    to bottom,
+                    transparent 30%,
+                    rgba(6,21,34,.95)
+                );
+
+            z-index: 1;
+        }
+
+
+        .milestone-image::before {
+
+            position: relative;
+
+            z-index: 2;
+
+            filter:
+                drop-shadow(
+                    0 15px 25px
+                    rgba(0,0,0,.35)
+                );
+
+            transition:
+                transform .7s ease;
+        }
+
+
+        .milestone:hover
+        .milestone-image::before {
+
+            transform:
+                scale(1.15)
+                rotate(5deg);
+        }
+
+
+        /* =====================================================
+           CARD CONTENT
+        ===================================================== */
+
+        .card-content {
+
+            padding:
+                30px;
+
+            position: relative;
+
+            z-index: 5;
+        }
+
+
+        .year {
+
+            display: inline-flex;
+
+            padding:
+                7px 16px;
+
+            border-radius:
+                50px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    var(--pink),
+                    var(--gold)
+                );
+
+            color:
+                var(--navy);
+
+            font-size:
+                .75rem;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                1.5px;
+
+            margin-bottom:
+                18px;
+        }
+
+
+        .milestone h3 {
+
+            font-size:
+                1.65rem;
+
+            line-height:
+                1.15;
+
+            margin-bottom:
+                13px;
+        }
+
+
+        .milestone p {
+
+            color:
+                var(--gray);
+
+            line-height:
+                1.65;
+        }
+
+
+        /* =====================================================
+           HOVER DETAILS
+        ===================================================== */
+
+        .details {
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            padding:
+                35px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            justify-content:
+                center;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(6,21,34,.98),
+                    rgba(0,104,181,.95)
+                );
+
+            opacity:
+                0;
+
+            transform:
+                translateY(100%);
+
+            transition:
+
+                transform
+                .6s
+                cubic-bezier(.2,.8,.2,1),
+
+                opacity
+                .45s ease;
+
+            z-index:
+                20;
+        }
+
+
+        .milestone:hover
+        .details {
+
+            opacity:
+                1;
+
+            transform:
+                translateY(0);
+        }
+
+
+        .details h4 {
+
+            color:
+                var(--gold);
+
+            font-size:
+                1.45rem;
+
+            margin-bottom:
+                18px;
+        }
+
+
+        .details p {
+
+            color:
+                white;
+
+            line-height:
+                1.7;
+
+            margin-bottom:
+                18px;
+        }
+
+
+        .details .goal {
+
+            color:
+                var(--pink);
+
+            font-weight:
+                700;
+        }
+
+
+        /* =====================================================
+           LEARN MORE
+        ===================================================== */
+
+        .learn-more {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            margin-top:
+                15px;
+
+            color:
+                var(--pink);
+
+            font-weight:
+                700;
+
+            text-decoration:
+                none;
+        }
+
+
+        .learn-more span {
+
+            transition:
+                transform .3s ease;
+        }
+
+
+        .learn-more:hover span {
+
+            transform:
+                translateX(7px);
+        }
+
+
+        /* =====================================================
+           CURRENT PROGRESS
+        ===================================================== */
+
+        .progress-section {
+
+            padding:
+                70px
+                7vw
+                110px;
+        }
+
+
+        .section-title {
+
+            text-align:
+                center;
+
+            color:
+                var(--gold);
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                4px;
+
+            font-size:
+                .75rem;
+
+            margin-bottom:
+                50px;
+        }
+
+
+        .stats {
+
+            max-width:
+                1200px;
+
+            margin:
+                auto;
+
+            display:
+                flex;
+
+            gap:
+                20px;
+
+            flex-wrap:
+                wrap;
+        }
+
+
+        .stat {
+
+            flex:
+                1 1 220px;
+
+            padding:
+                35px 25px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
+            border-radius:
+                22px;
+
+            background:
+                rgba(255,255,255,.06);
+
+            text-align:
+                center;
+
+            transition:
+                transform .4s ease,
+                background .4s ease,
+                border-color .4s ease;
+        }
+
+
+        .stat:hover {
+
+            transform:
+                translateY(-10px);
+
+            background:
+                rgba(248,220,229,.1);
+
+            border-color:
+                var(--pink);
+        }
+
+
+        .stat-number {
+
+            font-size:
+                2.7rem;
+
+            font-weight:
+                800;
+
+            color:
+                var(--pink);
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .stat-label {
+
+            color:
+                var(--gray);
+
+            line-height:
+                1.5;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+
+            padding:
+                45px
+                7vw;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.12);
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                30px;
+
+            color:
+                var(--gray);
+
+            font-size:
+                .85rem;
+        }
+
+
+        .footer-brand {
+
+            font-size:
+                2rem;
+
+            font-weight:
+                800;
+
+            color:
+                white;
+
+            letter-spacing:
+                -2px;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 767px) {
+
+            header {
+
+                min-height:
+                    75vh;
+
+                padding:
+                    100px
+                    25px
+                    60px;
+            }
+
+
+            .top-nav {
+
+                left:
+                    25px;
+
+                right:
+                    25px;
+            }
+
+
+            .nav-links {
+
+                display:
+                    none;
+            }
+
+
+            .brand {
+
+                font-size:
+                    2rem;
+            }
+
+
+            h1 {
+
+                font-size:
+                    3rem;
+
+                letter-spacing:
+                    -2px;
+            }
+
+
+            .hero-subheading {
+
+                font-size:
+                    1rem;
+            }
+
+
+            .eyebrow {
+
+                font-size:
+                    .65rem;
+
+                letter-spacing:
+                    2px;
+            }
+
+
+            .timeline-section {
+
+                padding:
+                    20px
+                    20px
+                    80px;
+            }
+
+
+            .timeline-line {
+
+                display:
+                    none;
+            }
+
+
+            /*
+                Switch from horizontal
+                timeline to vertical stack.
+            */
+
+            .timeline {
+
+                flex-direction:
+                    column;
+
+                overflow:
+                    visible;
+
+                padding:
+                    20px 0;
+
+                gap:
+                    30px;
+
+                scroll-snap-type:
+                    none;
+            }
+
+
+            .milestone {
+
+                width:
+                    100%;
+
+                flex:
+                    none;
+
+                min-height:
+                    auto;
+
+                transform:
+                    none !important;
+            }
+
+
+            .timeline-controls {
+
+                display:
+                    none;
+            }
+
+
+            /*
+                Hover doesn't work reliably
+                on mobile, so details remain visible.
+            */
+
+            .details {
+
+                position:
+                    relative;
+
+                inset:
+                    auto;
+
+                opacity:
+                    1;
+
+                transform:
+                    none;
+
+                padding:
+                    25px;
+
+                background:
+
+                    linear-gradient(
+                        145deg,
+                        rgba(6,21,34,.96),
+                        rgba(0,104,181,.9)
+                    );
+            }
+
+
+            .milestone:hover {
+
+                transform:
+                    translateY(-5px) !important;
+            }
+
+
+            .milestone-image {
+
+                height:
+                    190px;
+            }
+
+
+            .progress-section {
+
+                padding:
+                    50px
+                    20px
+                    80px;
+            }
+
+
+            .stats {
+
+                flex-direction:
+                    column;
+            }
+
+
+            footer {
+
+                flex-direction:
+                    column;
+
+                text-align:
+                    center;
+            }
+
+        }
+
+
+        /* =====================================================
+           TOUCH DEVICES
+        ===================================================== */
+
+        @media (hover: none) {
+
+            .milestone:hover {
+
+                transform:
+                    none;
+            }
+
+        }
+
+
+        /* =====================================================
+           REDUCED MOTION
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+
+                scroll-behavior:
+                    auto;
+            }
+
+
+            .timeline {
+
+                scroll-behavior:
+                    auto;
+            }
+
+
+            * {
+
+                animation-duration:
+                    .01ms !important;
+
+                transition-duration:
+                    .01ms !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ===================================================== -->
+
+    <header>
+
+        <nav class="top-nav">
+
+            <div class="brand">
+                intel
+            </div>
+
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="#timeline">
+                        Sustainability
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#progress">
+                        Progress
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#future">
+                        Future
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+        <!-- =================================================
+             HERO
+        ================================================= -->
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                Sustainability Timeline
+            </div>
+
+
+            <h1>
+                Building a More
+                <br>
+                Sustainable Future
+            </h1>
+
+
+            <p class="hero-subheading">
+
+                Explore Intel's sustainability journey through
+                renewable energy, water stewardship, circularity,
+                climate action, and long-term emissions goals.
+
+            </p>
+
+
+            <div class="scroll-prompt">
+
+                ↓
+
+                Scroll to explore Intel's goals
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         INTRO
+    ===================================================== -->
+
+    <section class="intro">
+
+        <h2>
+            A Timeline of Progress
+        </h2>
+
+
+        <p>
+
+            Intel's sustainability strategy focuses on reducing
+            environmental impact while continuing to advance
+            semiconductor technology.
+
+            Explore the milestones below and hover over each
+            card to discover more.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         TIMELINE
+    ===================================================== -->
+
+    <section
+        class="timeline-section"
+        id="timeline"
+    >
+
+
+        <!-- Navigation buttons -->
+
+        <div class="timeline-controls">
+
+            <button
+                class="timeline-button"
+                id="timelinePrev"
+                aria-label="Previous milestone"
+            >
+                ←
+            </button>
+
+
+            <button
+                class="timeline-button"
+                id="timelineNext"
+                aria-label="Next milestone"
+            >
+                →
+            </button>
+
+        </div>
+
+
+        <div class="timeline-line"></div>
+
+
+        <div class="timeline">
+
+
+            <!-- =================================================
+                 2030 RENEWABLE ELECTRICITY
+            ================================================= -->
+
+            <article class="milestone">
+
+                <div
+                    class="milestone-image renewable-image"
+                    role="img"
+                    aria-label="Renewable energy visual"
+                ></div>
+
+
+                <div class="card-content">
+
+                    <span class="year">
+                        2030
+                    </span>
+
+
+                    <h3>
+                        Renewable Electricity
+                    </h3>
+
+
+                    <p>
+
+                        Intel is working toward
+                        100% renewable electricity
+                        across its global operations.
+
+                    </p>
+
+                </div>
+
+
+                <div class="details">
+
+                    <h4>
+                        ☀️ Renewable Energy
+                    </h4>
+
+
+                    <p>
+
+                        Intel's goal is to reach
+                        100% renewable electricity
+                        across its global operations
+                        by 2030.
+
+                    </p>
+
+
+                    <p class="goal">
+
+                        Goal:
+                        100% renewable electricity
+
+                    </p>
+
+
+                    <a
+                        href="https://www.intel.com/content/www/us/en/corporate-responsibility/sustainability.html"
+                        target="_blank"
+                        class="learn-more"
+                    >
+
+                        Learn more
+
+                        <span>→</span>
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 2030 WATER
+            ================================================= -->
+
+            <article class="milestone">
+
+                <div
+                    class="milestone-image water-image"
+                    role="img"
+                    aria-label="Water conservation visual"
+                ></div>
+
+
+                <div class="card-content">
+
+                    <span class="year">
+                        2030
+                    </span>
+
+
+                    <h3>
+                        Net Positive Water
+                    </h3>
+
+
+                    <p>
+
+                        Intel is investing in
+                        conservation and watershed
+                        restoration projects.
+
+                    </p>
+
+                </div>
+
+
+                <div class="details">
+
+                    <h4>
+                        💧 Water Stewardship
+                    </h4>
+
+
+                    <p>
+
+                        Intel's water strategy focuses
+                        on conservation, efficiency,
+                        and watershed restoration.
+
+                    </p>
+
+
+                    <p class="goal">
+
+                        Goal:
+                        Net positive water
+
+                    </p>
+
+
+                    <a
+                        href="https://www.intel.com/content/www/us/en/corporate-responsibility/sustainability.html"
+                        target="_blank"
+                        class="learn-more"
+                    >
+
+                        Learn more
+
+                        <span>→</span>
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 2030 ZERO WASTE
+            ================================================= -->
+
+            <article class="milestone">
+
+                <div
+                    class="milestone-image waste-image"
+                    role="img"
+                    aria-label="Circular economy visual"
+                ></div>
+
+
+                <div class="card-content">
+
+                    <span class="year">
+                        2030
+                    </span>
+
+
+                    <h3>
+                        Zero Waste
+                    </h3>
+
+
+                    <p>
+
+                        Intel is working toward
+                        eliminating waste sent
+                        to landfill.
+
+                    </p>
+
+                </div>
+
+
+                <div class="details">
+
+                    <h4>
+                        ♻️ Circular Economy
+                    </h4>
+
+
+                    <p>
+
+                        Intel is expanding recycling,
+                        reuse, recovery, and other
+                        circular manufacturing practices.
+
+                    </p>
+
+
+                    <p class="goal">
+
+                        Goal:
+                        Zero waste to landfill
+
+                    </p>
+
+
+                    <a
+                        href="https://www.intel.com/content/www/us/en/corporate-responsibility/sustainability.html"
+                        target="_blank"
+                        class="learn-more"
+                    >
+
+                        Learn more
+
+                        <span>→</span>
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 2040 NET ZERO
+            ================================================= -->
+
+            <article class="milestone">
+
+                <div
+                    class="milestone-image netzero-image"
+                    role="img"
+                    aria-label="Net zero emissions visual"
+                ></div>
+
+
+                <div class="card-content">
+
+                    <span class="year">
+                        2040
+                    </span>
+
+
+                    <h3>
+                        Net-Zero Operations
+                    </h3>
+
+
+                    <p>
+
+                        Intel aims to achieve
+                        net-zero Scope 1 and Scope 2
+                        greenhouse gas emissions.
+
+                    </p>
+
+                </div>
+
+
+                <div class="details">
+
+                    <h4>
+                        🌎 Net-Zero Operations
+                    </h4>
+
+
+                    <p>
+
+                        Intel's long-term climate
+                        strategy targets net-zero
+                        Scope 1 and Scope 2 greenhouse
+                        gas emissions from operations.
+
+                    </p>
+
+
+                    <p class="goal">
+
+                        Goal:
+                        Net-zero Scope 1 & 2 emissions
+
+                    </p>
+
+
+                    <a
+                        href="https://www.intel.com/content/www/us/en/corporate-responsibility/sustainability.html"
+                        target="_blank"
+                        class="learn-more"
+                    >
+
+                        Learn more
+
+                        <span>→</span>
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 2050 SUPPLY CHAIN
+            ================================================= -->
+
+            <article
+                class="milestone"
+                id="future"
+            >
+
+                <div
+                    class="milestone-image supply-image"
+                    role="img"
+                    aria-label="Sustainable supply chain visual"
+                ></div>
+
+
+                <div class="card-content">
+
+                    <span class="year">
+                        2050
+                    </span>
+
+
+                    <h3>
+                        Sustainable Supply Chain
+                    </h3>
+
+
+                    <p>
+
+                        Intel's long-term climate
+                        strategy extends beyond
+                        its own operations.
+
+                    </p>
+
+                </div>
+
+
+                <div class="details">
+
+                    <h4>
+                        🔗 Scope 3 Emissions
+                    </h4>
+
+
+                    <p>
+
+                        Intel's long-term strategy
+                        includes addressing upstream
+                        Scope 3 greenhouse gas emissions
+                        throughout its value chain.
+
+                    </p>
+
+
+                    <p class="goal">
+
+                        Goal:
+                        Net-zero upstream Scope 3
+
+                    </p>
+
+
+                    <a
+                        href="https://www.intel.com/content/www/us/en/corporate-responsibility/sustainability.html"
+                        target="_blank"
+                        class="learn-more"
+                    >
+
+                        Learn more
+
+                        <span>→</span>
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CURRENT PROGRESS
+    ===================================================== -->
+
+    <section
+        class="progress-section"
+        id="progress"
+    >
+
+        <div class="section-title">
+
+            Our Current Progress
+
+        </div>
+
+
+        <div class="stats">
+
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    99%
+                </div>
+
+                <div class="stat-label">
+
+                    Global renewable electricity
+                    reported for 2025
+
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    11.2B
+                </div>
+
+                <div class="stat-label">
+
+                    Gallons of water conserved
+                    in 2025
+
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    69%
+                </div>
+
+                <div class="stat-label">
+
+                    Manufacturing waste streams
+                    using circular practices
+
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    2040
+                </div>
+
+                <div class="stat-label">
+
+                    Target for net-zero
+                    Scope 1 and 2 emissions
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer>
+
+        <div class="footer-brand">
+            intel
+        </div>
+
+
+        <div>
+            Technology • Responsibility • The Future
+        </div>
+
+
+        <div>
+            Sustainability Timeline
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+
+        /* =====================================================
+           GET ELEMENTS
+        ===================================================== */
+
+        const timeline =
+            document.querySelector(".timeline");
+
+        const cards =
+            document.querySelectorAll(".milestone");
+
+        const nextButton =
+            document.querySelector("#timelineNext");
+
+        const previousButton =
+            document.querySelector("#timelinePrev");
+
+
+        /* =====================================================
+           CALCULATE CARD WIDTH
+        ===================================================== */
+
+        function getScrollAmount() {
+
+            if (!cards.length) {
+                return 350;
+            }
+
+            const cardWidth =
+                cards[0].getBoundingClientRect().width;
+
+            return cardWidth + 35;
+        }
+
+
+        /* =====================================================
+           NEXT BUTTON
+        ===================================================== */
+
+        nextButton.addEventListener(
+            "click",
+            () => {
+
+                timeline.scrollBy({
+
+                    left:
+                        getScrollAmount(),
+
+                    behavior:
+                        "smooth"
+
+                });
+
+            }
+        );
+
+
+        /* =====================================================
+           PREVIOUS BUTTON
+        ===================================================== */
+
+        previousButton.addEventListener(
+            "click",
+            () => {
+
+                timeline.scrollBy({
+
+                    left:
+                        -getScrollAmount(),
+
+                    behavior:
+                        "smooth"
+
+                });
+
+            }
+        );
+
+
+        /* =====================================================
+           ACTIVE CARD OBSERVER
+        ===================================================== */
+
+        const observer =
+            new IntersectionObserver(
+
+                (entries) => {
+
+                    entries.forEach(
+                        (entry) => {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target.classList.add(
+                                    "active-milestone"
+                                );
+
+                            } else {
+
+                                entry.target.classList.remove(
+                                    "active-milestone"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+
+                {
+
+                    root:
+                        timeline,
+
+                    threshold:
+                        .65
+
+                }
+
+            );
+
+
+        cards.forEach(
+            card => observer.observe(card)
+        );
+
+
+        /* =====================================================
+           RANDOM CARD TRANSITIONS
+        ===================================================== */
+
+        cards.forEach(
+            (card, index) => {
+
+                const randomRotation =
+                    (
+                        Math.random() * 1.4 - .7
+                    ).toFixed(2);
+
+                const randomOffset =
+                    Math.floor(
+                        Math.random() * 24
+                    ) - 12;
+
+
+                card.style.transform =
+                    `
+                    translateY(${randomOffset}px)
+                    rotate(${randomRotation}deg)
+                    `;
+
+
+                /* Re-randomize when pointer leaves */
+
+                card.addEventListener(
+                    "mouseleave",
+                    () => {
+
+                        if (
+                            window.innerWidth > 767
+                        ) {
+
+                            const newRotation =
+                                (
+                                    Math.random()
+                                    * 1.4
+                                    - .7
+                                ).toFixed(2);
+
+                            const newOffset =
+                                Math.floor(
+                                    Math.random()
+                                    * 24
+                                ) - 12;
+
+
+                            card.style.transform =
+                                `
+                                translateY(${newOffset}px)
+                                rotate(${newRotation}deg)
+                                `;
+
+                        }
+
+                    }
+                );
+
+
+                /* Hover */
+
+                card.addEventListener(
+                    "mouseenter",
+                    () => {
+
+                        if (
+                            window.innerWidth > 767
+                        ) {
+
+                            card.style.transform =
+                                `
+                                translateY(-18px)
+                                rotate(-1deg)
+                                scale(1.025)
+                                `;
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           KEYBOARD NAVIGATION
+        ===================================================== */
+
+        timeline.addEventListener(
+            "keydown",
+            (event) => {
+
+                if (
+                    event.key === "ArrowRight"
+                ) {
+
+                    timeline.scrollBy({
+
+                        left:
+                            getScrollAmount(),
+
+                        behavior:
+                            "smooth"
+
+                    });
+
+                }
+
+
+                if (
+                    event.key === "ArrowLeft"
+                ) {
+
+                    timeline.scrollBy({
+
+                        left:
+                            -getScrollAmount(),
+
+                        behavior:
+                            "smooth"
+
+                    });
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           DRAG-TO-SCROLL
+        ===================================================== */
+
+        let isDragging = false;
+
+        let startX;
+
+        let scrollStart;
+
+
+        timeline.addEventListener(
+            "mousedown",
+            (event) => {
+
+                isDragging = true;
+
+                startX =
+                    event.pageX -
+                    timeline.offsetLeft;
+
+                scrollStart =
+                    timeline.scrollLeft;
+
+                timeline.style.cursor =
+                    "grabbing";
+
+            }
+        );
+
+
+        timeline.addEventListener(
+            "mouseleave",
+            () => {
+
+                isDragging = false;
+
+                timeline.style.cursor =
+                    "grab";
+
+            }
+        );
+
+
+        timeline.addEventListener(
+            "mouseup",
+            () => {
+
+                isDragging = false;
+
+                timeline.style.cursor =
+                    "grab";
+
+            }
+        );
+
+
+        timeline.addEventListener(
+            "mousemove",
+            (event) => {
+
+                if (!isDragging) {
+                    return;
+                }
+
+
+                event.preventDefault();
+
+
+                const x =
+                    event.pageX -
+                    timeline.offsetLeft;
+
+
+                const distance =
+                    x - startX;
+
+
+                timeline.scrollLeft =
+                    scrollStart - distance;
+
+            }
+        );
+
+
+        /* =====================================================
+           INITIAL CURSOR
+        ===================================================== */
+
+        timeline.style.cursor =
+            "grab";
+
+
+    </script>
+
+
+</body>
+
+</html>
